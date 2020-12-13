@@ -6,10 +6,50 @@ import { CartContext } from '../../contexts/CartContext';
 import { formatNumber } from '../../helpers/utils';
 import { Link } from 'react-router-dom';
 
+
+
+
 const Cart = () => {
 
     const { total, cartItems, itemCount, clearCart, checkout, handleCheckout } = useContext(CartContext);
     
+    //useEffect(() => console.log('mounted or updated'));
+    // useEffect(() => {
+    //     function handleStatusChange(status) {
+    //       setIsOnline(status.isOnline);
+    //     }
+    //     ChatAPI.subscribeToFriendStatus(props.friend.id, handleStatusChange);
+    //     // Specify how to clean up after this effect:
+    //     return function cleanup() {
+    //       ChatAPI.unsubscribeFromFriendStatus(props.friend.id, handleStatusChange);
+    //     };
+    //   });
+
+    // useEffect(() => {
+    //     return () => {
+    //         console.log("xxxxxx")
+    //         liff.init({ liffId: '1655374042-Kx6Ld0Zm' })
+    //         .then(async () => {
+    //             if (!liff.isLoggedIn()) {
+    //                 liff.login();
+    //             }
+    //         })
+    //         .catch((err) => {
+    //             console.log(err)
+    //         });
+    //     }
+    // }, []);
+    // useEffect(()=>{
+    //     liff.init({ liffId: '1655374042-Kx6Ld0Zm' })
+    //     .then(async () => {
+    //       if (!liff.isLoggedIn()) {
+    //         liff.login();
+    //       }
+    //     })
+    //     .catch((err) => {
+    //       console.log(err)
+    //     });
+    // })
     return ( 
         <Layout title="Cart" description="This is the Cart page" >
             <div >

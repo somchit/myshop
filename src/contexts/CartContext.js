@@ -1,5 +1,6 @@
 import React, { createContext, useReducer } from 'react';
 import { CartReducer, sumItems } from './CartReducer';
+import liff from '@line/liff';
 
 export const CartContext = createContext()
 
@@ -11,7 +12,13 @@ const CartContextProvider = ({children}) => {
     const [state, dispatch] = useReducer(CartReducer, initialState)
 
     const increase = payload => {
-        dispatch({type: 'INCREASE', payload})
+       
+        liff.sendMessages([{
+            type: 'text',
+            text: "Hi LIFF"
+          }]).then(() => {
+            dispatch({type: 'INCREASE', payload})
+          });
     }
 
     const decrease = payload => {
