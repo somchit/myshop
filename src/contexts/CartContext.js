@@ -16,7 +16,7 @@ const CartContextProvider = ({children}) => {
         let path = window.location.protocol + '//' + window.location.hostname;// + ':' + window.location.port;
         liff.sendMessages([{
             type: 'text',
-            text: "#add ["+payload.name+"] to cart price: ["+payload.price+"] quantity: ["+payload.quantity+"]",
+            text: "#add ["+payload.name+"] to cart price: ["+payload.price+"] quantity: [1]",
           }]).then(() => {
             liff.sendMessages([{
                 type: "image",
@@ -34,7 +34,7 @@ const CartContextProvider = ({children}) => {
         let path = window.location.protocol + '//' + window.location.hostname;// + ':' + window.location.port;
         liff.sendMessages([{
             type: 'text',
-            text: "#remove ["+payload.name+"] to cart price: ["+payload.price+"] quantity: ["+payload.quantity+"]",
+            text: "#del ["+payload.name+"] to cart price: ["+payload.price+"] quantity: [1]",
           }]).then(() => {
             liff.sendMessages([{
                 type: "image",
@@ -53,7 +53,7 @@ const CartContextProvider = ({children}) => {
         let path = window.location.protocol + '//' + window.location.hostname;// + ':' + window.location.port;
         liff.sendMessages([{
             type: 'text',
-            text: "#add ["+payload.name+"] to cart price: ["+payload.price+"] quantity: ["+payload.quantity+"]",
+            text: "#addproduct ["+payload.name+"] to cart price: ["+payload.price+"] quantity: [1]",
           }]).then(() => {
             liff.sendMessages([{
                 type: "image",
@@ -72,7 +72,7 @@ const CartContextProvider = ({children}) => {
         let path = window.location.protocol + '//' + window.location.hostname;// + ':' + window.location.port;
         liff.sendMessages([{
             type: 'text',
-            text: "#delete ["+payload.name+"] to cart price: ["+payload.price+"] quantity: ["+payload.quantity+"]",
+            text: "#remove ["+payload.name+"] to cart price: ["+payload.price+"] quantity: [1]",
           }]).then(() => {
             liff.sendMessages([{
                 type: "image",
@@ -87,7 +87,14 @@ const CartContextProvider = ({children}) => {
     }
 
     const clearCart = () => {
-        dispatch({type: 'CLEAR'})
+       // dispatch({type: 'CLEAR'})
+
+        liff.sendMessages([{
+            type: 'text',
+            text: "#clear",
+          }]).then(() => {
+            dispatch({type: 'CLEAR'})
+          });
     }
 
     const handleCheckout = () => {
