@@ -12,25 +12,78 @@ const CartContextProvider = ({children}) => {
     const [state, dispatch] = useReducer(CartReducer, initialState)
 
     const increase = payload => {
-       
+        console.log(payload)
+        let path = window.location.protocol + '//' + window.location.hostname;// + ':' + window.location.port;
         liff.sendMessages([{
             type: 'text',
-            text: "Hi LIFF"
+            text: "#add ["+payload.name+"] to cart price: ["+payload.price+"] quantity: ["+payload.quantity+"]",
           }]).then(() => {
-            dispatch({type: 'INCREASE', payload})
-          });
+            liff.sendMessages([{
+                type: "image",
+                originalContentUrl: path+payload.photo,
+                previewImageUrl: path+payload.photo
+              }]).then(() => {
+                dispatch({type: 'INCREASE', payload})
+              });
+            
+        });
     }
 
     const decrease = payload => {
-        dispatch({type: 'DECREASE', payload})
+        console.log(payload)
+        let path = window.location.protocol + '//' + window.location.hostname;// + ':' + window.location.port;
+        liff.sendMessages([{
+            type: 'text',
+            text: "#remove ["+payload.name+"] to cart price: ["+payload.price+"] quantity: ["+payload.quantity+"]",
+          }]).then(() => {
+            liff.sendMessages([{
+                type: "image",
+                originalContentUrl: path+payload.photo,
+                previewImageUrl: path+payload.photo
+              }]).then(() => {
+                dispatch({type: 'DECREASE', payload})
+              });
+            
+        });
+        //dispatch({type: 'DECREASE', payload})
     }
 
     const addProduct = payload => {
-        dispatch({type: 'ADD_ITEM', payload})
+        console.log(payload)
+        let path = window.location.protocol + '//' + window.location.hostname;// + ':' + window.location.port;
+        liff.sendMessages([{
+            type: 'text',
+            text: "#add ["+payload.name+"] to cart price: ["+payload.price+"] quantity: ["+payload.quantity+"]",
+          }]).then(() => {
+            liff.sendMessages([{
+                type: "image",
+                originalContentUrl: path+payload.photo,
+                previewImageUrl: path+payload.photo
+              }]).then(() => {
+                dispatch({type: 'ADD_ITEM', payload})
+              });
+            
+        });
+        //dispatch({type: 'ADD_ITEM', payload})
     }
 
     const removeProduct = payload => {
-        dispatch({type: 'REMOVE_ITEM', payload})
+        console.log(payload)
+        let path = window.location.protocol + '//' + window.location.hostname;// + ':' + window.location.port;
+        liff.sendMessages([{
+            type: 'text',
+            text: "#delete ["+payload.name+"] to cart price: ["+payload.price+"] quantity: ["+payload.quantity+"]",
+          }]).then(() => {
+            liff.sendMessages([{
+                type: "image",
+                originalContentUrl: path+payload.photo,
+                previewImageUrl: path+payload.photo
+              }]).then(() => {
+                dispatch({type: 'REMOVE_ITEM', payload})
+              });
+            
+        });
+       // dispatch({type: 'REMOVE_ITEM', payload})
     }
 
     const clearCart = () => {
@@ -38,8 +91,15 @@ const CartContextProvider = ({children}) => {
     }
 
     const handleCheckout = () => {
-        console.log('CHECKOUT', state);
-        dispatch({type: 'CHECKOUT'})
+      
+            liff.sendMessages([{
+                type: 'text',
+                text: "#check out",
+              }]).then(() => {
+                dispatch({type: 'CHECKOUT', state})
+              });
+            
+        
     }
 
     const contextValues = {
